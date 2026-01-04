@@ -33,19 +33,22 @@ const pizzasDoces = [
 
 ]
 
-porcoes = [
+const porcoes = [
   { numero: 29, titulo: "Batata c/ Bacon e Cheddar", descricao: "", valor: 32.00 },
   { numero: 30, titulo: "Esfihas", descricao: "Vários sabores", valor: 5.00 },  
 ]
 
 
 const list = document.querySelector(".pizzas");
+const listDoce = document.querySelector(".pizzas-doces");
+const listPorcoes = document.querySelector(".porcoes");
 
 function mostraPizzas() {
   pizzas
     .sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'))
     .forEach((pizza, index) => {
       const li = document.createElement('li');
+      li.className = "flex flex-wrap items-center gap-2 w-ful"
       li.innerHTML = `
         <span class="text-[#fdfe0c] text-lg">${index + 1} - </span>
         <span class="text-white text-lg">${pizza.titulo} </span>
@@ -56,4 +59,36 @@ function mostraPizzas() {
     });
 }
 
+function mostraPizzasDoces() {
+  pizzasDoces.
+    sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'))
+    .forEach((pizza, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span class="text-[#fdfe0c] text-lg">${index + 1 + pizzas.length} - </span>
+        <span class="text-white text-lg">${pizza.titulo} </span>
+        <span class="text-sm text-[#fdfe0c]">${pizza.descricao}</span>
+        <span class="text-white">R$ ${pizza.valor.toFixed(2)}</span>
+      `;
+      listDoce.appendChild(li);
+    })
+}
+
+function mostraPorcoes() {
+  porcoes.
+    sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'))
+    .forEach((item, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span class="text-[#fdfe0c] text-lg">${index + 1 + pizzas.length + pizzasDoces.length} - </span>
+        <span class="text-white text-lg">${item.titulo} </span>
+        <span class="text-sm text-[#fdfe0c]">${item.descricao}</span>
+        <span class="text-white">R$ ${item.valor.toFixed(2)}</span>
+      `;
+      listPorcoes.appendChild(li);
+    })
+}
+
 mostraPizzas()
+mostraPizzasDoces()
+mostraPorcoes()
