@@ -41,12 +41,19 @@ porcoes = [
 
 const list = document.querySelector(".pizzas");
 
-function mostraPizzas () {
-  pizzas.forEach((pizza) => {
-    const li = document.createElement('li');
-    li.innerHTML = `<span>${pizza.titulo}</span><span>${pizza.descricao}</span><span>R$${String(pizza.valor)}</span>`
-    list.appendChild(li)
-  })
+function mostraPizzas() {
+  pizzas
+    .sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'))
+    .forEach((pizza, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span class="text-[#fdfe0c] text-lg">${index + 1} - </span>
+        <span class="text-white text-lg">${pizza.titulo} </span>
+        <span class="text-sm text-[#fdfe0c]">${pizza.descricao}</span>
+        <span class="text-white">R$ ${pizza.valor.toFixed(2)}</span>
+      `;
+      list.appendChild(li);
+    });
 }
 
 mostraPizzas()
